@@ -1,0 +1,3 @@
+[submodule "dolarnobanco"]
+	path = dolarnobanco
+	url = https://github.com/caioalonso/dolarnobanco
