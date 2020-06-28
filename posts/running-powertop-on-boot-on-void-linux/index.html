@@ -20,7 +20,7 @@
             <h1><a href="https://caioalonso.com/">Caio Alonso</a></h1>
             <a class="email" href="mailto:caio@caioalonso.com">caio@caioalonso.com</a>
 <article>
-	<h2>Running PowerTOP on boot on Void Linux</h2><time>November 5, 2018</time><p><a href="https://01.org/powertop/">PowerTOP</a> doesn&rsquo;t remember settings between restarts, so it needs to be executed on every boot. Here&rsquo;s how I did it on Void Linux with runit.</p>
+	<h2>Running PowerTOP on boot on Void Linux</h2><time datetime=2018-11-05>November 5, 2018</time><p><a href="https://01.org/powertop/">PowerTOP</a> doesn&rsquo;t remember settings between restarts, so it needs to be executed on every boot. Here&rsquo;s how I did it on Void Linux with runit.</p>
 <p>Runit executes every script in <code>/etc/runit/core-services</code> once on boot. So I created a <code>/etc/runit/core-services/97-powertop.sh</code> script:</p>
 <pre><code>msg &quot;Powertop autotune...&quot;
 powertop --auto-tune
