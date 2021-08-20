@@ -1,0 +1,156 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Caio Alonso</title><link>https://caioalonso.com/</link><description>Recent content on Caio Alonso</description><generator>Hugo -- gohugo.io</generator><language>en-us</language><lastBuildDate>Wed, 23 Jan 2019 00:00:00 +0000</lastBuildDate><atom:link href="https://caioalonso.com/index.xml" rel="self" type="application/rss+xml"/><item><title>Restarting fancontrol after resume from sleep/suspend</title><link>https://caioalonso.com/posts/restarting-fancontrol-after-resume/</link><pubDate>Wed, 23 Jan 2019 00:00:00 +0000</pubDate><guid>https://caioalonso.com/posts/restarting-fancontrol-after-resume/</guid><description>&lt;p>Whenever I set up a new Linux system I install &lt;a href="https://github.com/lm-sensors/lm-sensors">lm-sensors&lt;/a> and enable the fancontrol utility. Most of the time fancontrol doesn&amp;rsquo;t get restarted when resuming from sleep/suspend. This is how I fix this with systemd:&lt;/p>
+&lt;p>/etc/systemd/system/fancontrol-resume.service&lt;/p>
+&lt;pre>&lt;code>[Unit]
+Description=Restart fancontrol after resume from sleep/suspend
+After=suspend.target
+[Service]
+Type=oneshot
+ExecStart=/bin/systemctl restart fancontrol.service
+[Install]
+WantedBy=suspend.target
+&lt;/code>&lt;/pre>&lt;p>Then:&lt;/p>
+&lt;pre>&lt;code>sudo systemctl daemon-reload
+sudo systemctl enable fancontrol-resume.service
+&lt;/code>&lt;/pre></description></item><item><title>Personal React App Starter for Babel 7, Webpack 4</title><link>https://caioalonso.com/posts/personal-react-starter-for-babel-7-webpack-4/</link><pubDate>Tue, 27 Nov 2018 00:00:00 +0000</pubDate><guid>https://caioalonso.com/posts/personal-react-starter-for-babel-7-webpack-4/</guid><description>&lt;p>Here&amp;rsquo;s a personal record of the steps I take to start a React app from zero, understanding what every single dependency does.&lt;/p>
+&lt;p>If you just want a clean React starting point, clone the repository:&lt;/p>
+&lt;pre>&lt;code>git clone https://github.com/caioalonso/react-boilerplate
+&lt;/code>&lt;/pre>&lt;p>Start here:&lt;/p>
+&lt;pre>&lt;code>mkdir projectname
+cd projectname
+mkdir src
+touch src/index.html
+touch src/index.js
+npm init -y
+&lt;/code>&lt;/pre>&lt;p>Now the dependencies:&lt;/p>
+&lt;pre>&lt;code>npm add --save-dev webpack webpack-cli html-webpack-plugin html-loader webpack-dev-server \
+@babel/core babel-loader @babel/preset-env @babel/preset-react \
+react react-dom \
+prettier
+&lt;/code>&lt;/pre>&lt;ul>
+&lt;li>&lt;code>webpack&lt;/code> bundles js modules, css, compresses images, etc;&lt;/li>
+&lt;li>&lt;code>webpack-cli&lt;/code> cli commands for webpack;&lt;/li>
+&lt;li>&lt;code>html-webpack-plugin&lt;/code> generates the index.html with the correct hashes etc;&lt;/li>
+&lt;li>&lt;code>html-loader&lt;/code> helps the webpack plugin deal with HTML files;&lt;/li>
+&lt;li>&lt;code>webpack-dev-server&lt;/code> serves a local self-refreshing version of the app;&lt;/li>
+&lt;li>&lt;code>@babel/core&lt;/code> core of the Babel compiler, most of the official Babel stuff sits under their @ scope;&lt;/li>
+&lt;li>&lt;code>babel-loader&lt;/code> is a Webpack &lt;a href="https://webpack.js.org/loaders/">loader&lt;/a> to use Babel in it;&lt;/li>
+&lt;li>&lt;code>@babel/preset-env&lt;/code> smart Babel preset that changes depending on which platform you&amp;rsquo;re compiling to;&lt;/li>
+&lt;li>&lt;code>@babel/preset-react&lt;/code> a Babel preset for compiling React stuff (JSX etc);&lt;/li>
+&lt;li>&lt;code>react&lt;/code> just what is needed for defining React components;&lt;/li>
+&lt;li>&lt;code>react-dom&lt;/code> React renderer for the web;&lt;/li>
+&lt;li>&lt;code>prettier&lt;/code> help keep js and css pretty;&lt;/li>
+&lt;/ul>
+&lt;p>Scripts in &lt;code>package.json&lt;/code>:&lt;/p>
+&lt;pre>&lt;code>&amp;quot;scripts&amp;quot;: {
+&amp;quot;start&amp;quot;: &amp;quot;webpack-dev-server --open --mode development&amp;quot;,
+&amp;quot;build&amp;quot;: &amp;quot;webpack --mode production&amp;quot;,
+}
+&lt;/code>&lt;/pre>&lt;p>Import the presets in &lt;code>.babelrc&lt;/code>:&lt;/p>
+&lt;pre>&lt;code>{
+&amp;quot;presets&amp;quot;: [
+&amp;quot;@babel/preset-env&amp;quot;,
+&amp;quot;@babel/preset-react&amp;quot;
+]
+}
+&lt;/code>&lt;/pre>&lt;p>Import the loaders and plugins in &lt;code>webpack.config.js&lt;/code>:&lt;/p>
+&lt;pre>&lt;code>const HtmlWebPackPlugin = require(&amp;quot;html-webpack-plugin&amp;quot;);
+module.exports = {
+module: {
+rules: [
+{
+test: /\.js$/,
+exclude: /node_modules/,
+use: {
+loader: &amp;quot;babel-loader&amp;quot;
+}
+},
+{
+test: /\.html$/,
+use: [
+{
+loader: &amp;quot;html-loader&amp;quot;
+}
+]
+}
+]
+},
+plugins: [
+new HtmlWebPackPlugin({
+template: &amp;quot;./src/index.html&amp;quot;,
+filename: &amp;quot;./index.html&amp;quot;
+})
+]
+};
+&lt;/code>&lt;/pre>&lt;p>Now edit &lt;code>src/index.html&lt;/code> and &lt;code>src/index.js&lt;/code> however you&amp;rsquo;d like, run &lt;code>npm start&lt;/code> to start the dev server, run &lt;code>npm run build&lt;/code> to compile it all into &lt;code>dist&lt;/code>.&lt;/p></description></item><item><title>Running PowerTOP on boot on Void Linux</title><link>https://caioalonso.com/posts/running-powertop-on-boot-on-void-linux/</link><pubDate>Mon, 05 Nov 2018 00:00:00 +0000</pubDate><guid>https://caioalonso.com/posts/running-powertop-on-boot-on-void-linux/</guid><description>&lt;p>&lt;a href="https://01.org/powertop/">PowerTOP&lt;/a> doesn&amp;rsquo;t remember settings between restarts, so it needs to be executed on every boot. Here&amp;rsquo;s how I did it on Void Linux with runit.&lt;/p>
+&lt;p>Runit executes every script in &lt;code>/etc/runit/core-services&lt;/code> once on boot. So I created a &lt;code>/etc/runit/core-services/97-powertop.sh&lt;/code> script:&lt;/p>
+&lt;pre>&lt;code>msg &amp;quot;Powertop autotune...&amp;quot;
+powertop --auto-tune
+&lt;/code>&lt;/pre>&lt;p>And made sure that it was executable with &lt;code>sudo chmod +x /etc/runit/core-services/97-powertop.sh&lt;/code>.&lt;/p>
+&lt;p>Since PowerTOP&amp;rsquo;s auto tune enables power management for every available device, my USB mouse kept turning off after 2 seconds of standby. In order to increase that delay to 10 minutes I changed the service file to this:&lt;/p>
+&lt;pre>&lt;code>msg &amp;quot;Powertop autotune...&amp;quot;
+echo $((10 * 60 * 1000)) &amp;gt; /sys/bus/usb/devices/1-1.6/power/autosuspend_delay_ms
+powertop --auto-tune
+&lt;/code>&lt;/pre>&lt;p>The &lt;code>/sys/bus/.../autosuspend_delay_ms&lt;/code> path will change depending on the device, so to discover it run &lt;code>sudo powertop&lt;/code> and manually switch the flag in the Tunables tab.&lt;/p></description></item><item><title>Self-hosted email with EC2, Docker and Mailu</title><link>https://caioalonso.com/posts/self-hosted-email-with-ec2-docker-mailu/</link><pubDate>Sat, 27 Oct 2018 00:00:00 +0000</pubDate><guid>https://caioalonso.com/posts/self-hosted-email-with-ec2-docker-mailu/</guid><description>&lt;p>These are the steps I followed when setting up my own mail server.&lt;/p>
+&lt;p>Fire up an Ubuntu EC2 instance, then:&lt;/p>
+&lt;pre>&lt;code>sudo apt update &amp;amp;&amp;amp; sudo apt upgrade -y
+sudo apt-get install -y apt-transport-https ca-certificates curl software-properties-common git vim
+&lt;/code>&lt;/pre>&lt;p>Make sure these ports are open in your AWS security group:&lt;/p>
+&lt;ul>
+&lt;li>25&lt;/li>
+&lt;li>80&lt;/li>
+&lt;li>110&lt;/li>
+&lt;li>143&lt;/li>
+&lt;li>443&lt;/li>
+&lt;li>465&lt;/li>
+&lt;li>587&lt;/li>
+&lt;li>993&lt;/li>
+&lt;li>995&lt;/li>
+&lt;/ul>
+&lt;p>Install Docker:&lt;/p>
+&lt;pre>&lt;code>curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
+sudo add-apt-repository &amp;quot;deb [arch=amd64] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable&amp;quot;
+sudo apt-get update
+sudo apt-get -y install docker-ce
+&lt;/code>&lt;/pre>&lt;p>Install docker-compose:&lt;/p>
+&lt;pre>&lt;code>sudo curl -L &amp;quot;https://github.com/docker/compose/releases/download/1.22.0/docker-compose-$(uname -s)-$(uname -m)&amp;quot; -o /usr/local/bin/docker-compose
+sudo chmod +x /usr/local/bin/docker-compose
+&lt;/code>&lt;/pre>&lt;p>Install &lt;a href="https://mailu.io/">Mailu&lt;/a>:&lt;/p>
+&lt;pre>&lt;code>sudo mkdir /mailu
+cd /mailu
+sudo wget https://mailu.io/1.5/_downloads/docker-compose.yml
+sudo wget https://mailu.io/1.5/_downloads/.env
+&lt;/code>&lt;/pre>&lt;p>Configure Mailu with &lt;code>sudo vim .env&lt;/code> and set these entries:&lt;/p>
+&lt;ul>
+&lt;li>&lt;code>SECRET_KEY&lt;/code> to a random 16 byte string;&lt;/li>
+&lt;li>&lt;code>BIND_ADDRESS4&lt;/code> to the EC2 instance&amp;rsquo;s &lt;strong>private IP&lt;/strong>;&lt;/li>
+&lt;li>&lt;code>DOMAIN&lt;/code> to the domain of your mail server;&lt;/li>
+&lt;li>&lt;code>HOSTNAMES&lt;/code> also to the domain of your server;&lt;/li>
+&lt;li>&lt;code>TLS_FLAVOR=tlsencrypt&lt;/code>;&lt;/li>
+&lt;li>&lt;code>DISABLE_STATISTICS=true&lt;/code>;&lt;/li>
+&lt;li>&lt;code>ADMIN=true&lt;/code>;&lt;/li>
+&lt;li>&lt;code>WEBMAIL=rainloop&lt;/code>;&lt;/li>
+&lt;li>&lt;code>WELCOME=true&lt;/code>;&lt;/li>
+&lt;/ul>
+&lt;p>Run it with:&lt;/p>
+&lt;pre>&lt;code>sudo docker-compose up -d
+&lt;/code>&lt;/pre>&lt;p>Add an admin account with, replacing the uppercase strings:&lt;/p>
+&lt;pre>&lt;code>sudo docker-compose run --rm admin python manage.py admin USERNAME DOMAIN PASSWORD
+&lt;/code>&lt;/pre>&lt;h2 id="antispam-measures">Antispam measures&lt;/h2>
+&lt;p>Test it with &lt;a href="https://www.mail-tester.com/">mail-tester&lt;/a>.&lt;/p>
+&lt;h3 id="spf">SPF&lt;/h3>
+&lt;p>Add a &lt;code>TXT&lt;/code> record to your nameserver. Name &lt;code>caioalonso.com.&lt;/code> and content &lt;code>v=spf1 mx a:mail.caioalonso.com -all&lt;/code>.&lt;/p>
+&lt;h3 id="dmarc">DMARC&lt;/h3>
+&lt;p>Go to your admin panel (https://&lt;code>DOMAIN&lt;/code>/admin), then &lt;code>Mail domains &amp;gt; the Details icon&lt;/code> and click &lt;code>Regenerate keys&lt;/code>.&lt;/p>
+&lt;p>Copy the &lt;code>DNS DMARC entry&lt;/code> line and do the same thing you did for the SPF. This time with name &lt;code>_dmarc.caioalonso.com&lt;/code> and the content is everything between quotes, in my case:&lt;/p>
+&lt;pre>&lt;code>v=DMARC1; p=reject; rua=mailto:admin@mail.caioalonso.com; ruf=mailto:admin@mail.caioalonso.com; adkim=s; aspf=s
+&lt;/code>&lt;/pre>&lt;h3 id="dkim">DKIM&lt;/h3>
+&lt;p>On that same page do the same thing you did with DMARC, but using the &lt;code>DNS DKIM Entry&lt;/code>.&lt;/p></description></item><item><title>Learning</title><link>https://caioalonso.com/learning/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://caioalonso.com/learning/</guid><description>&lt;p>I had the idea of logging all the learning stuff I read/watch for future reference. No idea if this is useful but it can&amp;rsquo;t hurt to try.&lt;/p>
+&lt;h3 id="may21">May/21&lt;/h3>
+&lt;ul>
+&lt;li>&lt;a href="https://www.youtube.com/watch?v=ieERUEhs910">&amp;ldquo;New&amp;rdquo; Features in C - Dan Saks&lt;/a>&lt;/li>
+&lt;li>&lt;a href="http://www.lighterra.com/papers/modernmicroprocessors/">Modern Microprocessors a 90-Minute Guide&lt;/a>&lt;/li>
+&lt;/ul>
+&lt;h3 id="april21">April/21&lt;/h3>
+&lt;ul>
+&lt;li>&lt;a href="https://rakyll.medium.com/things-i-wished-more-developers-knew-about-databases-2d0178464f78">Things I Wished More Developers Knew About Databases, Jaana Dogan&lt;/a>&lt;/li>
+&lt;/ul></description></item></channel></rss>
