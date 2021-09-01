@@ -144,7 +144,67 @@ sudo wget https://mailu.io/1.5/_downloads/.env
 &lt;p>Copy the &lt;code>DNS DMARC entry&lt;/code> line and do the same thing you did for the SPF. This time with name &lt;code>_dmarc.caioalonso.com&lt;/code> and the content is everything between quotes, in my case:&lt;/p>
 &lt;pre>&lt;code>v=DMARC1; p=reject; rua=mailto:admin@mail.caioalonso.com; ruf=mailto:admin@mail.caioalonso.com; adkim=s; aspf=s
 &lt;/code>&lt;/pre>&lt;h3 id="dkim">DKIM&lt;/h3>
-&lt;p>On that same page do the same thing you did with DMARC, but using the &lt;code>DNS DKIM Entry&lt;/code>.&lt;/p></description></item><item><title>Learning</title><link>https://caioalonso.com/learning/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://caioalonso.com/learning/</guid><description>&lt;p>I had the idea of logging all the learning stuff I read/watch for future reference. No idea if this is useful but it can&amp;rsquo;t hurt to try.&lt;/p>
+&lt;p>On that same page do the same thing you did with DMARC, but using the &lt;code>DNS DKIM Entry&lt;/code>.&lt;/p></description></item><item><title>Curriculum Vitæ</title><link>https://caioalonso.com/cv/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://caioalonso.com/cv/</guid><description>
+&lt;p class="cv-definition">
+&lt;span class="word">cur·ric·u·lum vi·tæ&lt;/span>&lt;br>
+kəˌrik(y)ələm ˈvēˌtī/&lt;br>
+&lt;i>noun&lt;/i>&lt;br>
+a brief account of a person's education, qualifications, and previous experience, typically sent with a job application.
+&lt;/p>
+&lt;h2>I make simple things that work&lt;/h2>
+&lt;p>Caio Alonso, software engineer. São Paulo, Brazil.&lt;br>
+&lt;a href="https://github.com/CaioAlonso">https://github.com/CaioAlonso&lt;/a>&lt;/p>
+&lt;p>I'm 30 years old. I've been programming professionally since I was 17. At 19 I quit college to start my own company with two of my best friends. After a while doing that, I decided to try new things.&lt;/p>
+&lt;h3>Work history&lt;/h3>
+&lt;ul>
+&lt;li>&lt;strong>2007 - 2009&lt;/strong> Web freelance gigs while finishing school starting university&lt;/li>
+&lt;li>&lt;strong>2010 - 2016&lt;/strong> Started my own web agency, built a ton of websites, ecommerces, internal web systems&lt;/li>
+&lt;li>&lt;strong>2013 - 2014&lt;/strong> Joined a game dev company, online bomberman clone&lt;/li>
+&lt;li>&lt;strong>2014 - 2016&lt;/strong> Founded a startup directed at the soccer market for teams to record and index each aspect of the game and produce a statistical analysis&lt;/li>
+&lt;li>&lt;strong>2015 - 2016&lt;/strong> Another startup, this one selling custom drawn t-shirts online&lt;/li>
+&lt;li>&lt;strong>2016 - 2018&lt;/strong> Took some time to take care of my health, went back to freelancing as a backend engineer&lt;/li>
+&lt;li>&lt;strong>2019 - 2021&lt;/strong> Backend engineer @ Tellus, helped the company go from 0 to $20mi AUM&lt;/li>
+&lt;/ul>
+&lt;h3>Skills&lt;/h3>
+&lt;h4>Human Languages&lt;/h4>
+&lt;ul>
+&lt;li>Portuguese, native&lt;/li>
+&lt;li>English, fluent&lt;/li>
+&lt;li>Spanish, ok-ish&lt;/li>
+&lt;li>German, still learning!&lt;/li>
+&lt;/ul>
+&lt;h4>Human-Machine Languages&lt;/h4>
+&lt;ul>
+&lt;li>Very confident with
+&lt;ul>
+&lt;li>JS&lt;/li>
+&lt;li>Go&lt;/li>
+&lt;li>Ruby (on Rails)&lt;/li>
+&lt;li>SQL&lt;/li>
+&lt;/ul>
+&lt;li>Confident with
+&lt;ul>
+&lt;li>Python&lt;/li>
+&lt;li>Java&lt;/li>
+&lt;li>Node.js&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>I'm learning
+&lt;ul>
+&lt;li>Rust&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;/ul>
+&lt;h4>I'm a big believer in&lt;/h4>
+&lt;ul>
+&lt;li>Free software&lt;/li>
+&lt;li>Distributed/descentralized/federated protocols&lt;/li>
+&lt;li>Self-hosting as a political statement&lt;/li>
+&lt;li>Agile methodologies, TDD/BDD&lt;/li>
+&lt;li>Fixing the problems you have instead of the problems you wish you had&lt;/li>
+&lt;li>&lt;a href="https://caioalonso.com/learning/">Continuous learning! I've been tracking the material that I finish&lt;/a>&lt;/li>
+&lt;/ul>
+&lt;abbr class="published" title="{{ page.date }}">Sept 2021&lt;/abbr></description></item><item><title>Learning</title><link>https://caioalonso.com/learning/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://caioalonso.com/learning/</guid><description>&lt;p>I had the idea of logging all the learning stuff I read/watch for future reference. No idea if this is useful but it can&amp;rsquo;t hurt to try.&lt;/p>
 &lt;h3 id="may21">May/21&lt;/h3>
 &lt;ul>
 &lt;li>&lt;a href="https://www.youtube.com/watch?v=ieERUEhs910">&amp;ldquo;New&amp;rdquo; Features in C - Dan Saks&lt;/a>&lt;/li>
@@ -153,4 +213,8 @@ sudo wget https://mailu.io/1.5/_downloads/.env
 &lt;h3 id="april21">April/21&lt;/h3>
 &lt;ul>
 &lt;li>&lt;a href="https://rakyll.medium.com/things-i-wished-more-developers-knew-about-databases-2d0178464f78">Things I Wished More Developers Knew About Databases, Jaana Dogan&lt;/a>&lt;/li>
+&lt;/ul>
+&lt;h3 id="jun21">Jun/21&lt;/h3>
+&lt;ul>
+&lt;li>&lt;a href="https://www.youtube.com/playlist?list=PLUl4u3cNGP63VIBQVWguXxZZi0566y7Wf">MIT 6.172 Performance Engineering of Software Systems, Fall 2018&lt;/a>&lt;/li>
 &lt;/ul></description></item></channel></rss>

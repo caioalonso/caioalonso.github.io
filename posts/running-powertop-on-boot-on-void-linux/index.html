@@ -1,9 +1,38 @@
-<!doctype html><html lang=en><head><meta charset=utf-8><meta http-equiv=x-ua-compatible content="IE=edge"><meta name=viewport content="width=device-width,initial-scale=1"><title>Running PowerTOP on boot on Void Linux</title><link rel=stylesheet href=/css/style.min.css><link rel=apple-touch-icon sizes=180x180 href=/apple-touch-icon.png><link rel=icon type=image/png sizes=32x32 href=/favicon-32x32.png><link rel=icon type=image/png sizes=16x16 href=/favicon-16x16.png><link rel=manifest href=/site.webmanifest><link rel=mask-icon href=/safari-pinned-tab.svg color=#5bbad5><meta name=msapplication-TileColor content="#da532c"><meta name=theme-color content="#ffffff"></head><body><div class=wrapper><h1><a href=https://caioalonso.com/>Caio Alonso</a></h1><a class=email href=mailto:caio@caioalonso.com>caio@caioalonso.com</a>
+<!doctype html><html lang=en>
+<head>
+<meta charset=utf-8>
+<meta http-equiv=x-ua-compatible content="IE=edge">
+<meta name=viewport content="width=device-width,initial-scale=1">
+<title>Running PowerTOP on boot on Void Linux</title>
+<link rel=stylesheet href=/css/style.min.css>
+<link rel=apple-touch-icon sizes=180x180 href=/apple-touch-icon.png>
+<link rel=icon type=image/png sizes=32x32 href=/favicon-32x32.png>
+<link rel=icon type=image/png sizes=16x16 href=/favicon-16x16.png>
+<link rel=manifest href=/site.webmanifest>
+<link rel=mask-icon href=/safari-pinned-tab.svg color=#5bbad5>
+<meta name=msapplication-TileColor content="#da532c">
+<meta name=theme-color content="#ffffff">
+</head>
+<body>
+<div class=wrapper>
+<h1><a href=https://caioalonso.com/>Caio Alonso</a></h1>
+<a class=email href=mailto:caio@caioalonso.com>caio@caioalonso.com</a>
 <a href=https://caioalonso.com/learning/>learning</a>
+<a href=https://caioalonso.com/cv/>cv</a>
 <a href=https://github.com/caioalonso>github</a>
-<a href=https://twitter.com/caioalon>twitter</a><article><h2>Running PowerTOP on boot on Void Linux</h2><time datetime=2018-11-05>November 5, 2018</time><p><a href=https://01.org/powertop/>PowerTOP</a> doesn&rsquo;t remember settings between restarts, so it needs to be executed on every boot. Here&rsquo;s how I did it on Void Linux with runit.</p><p>Runit executes every script in <code>/etc/runit/core-services</code> once on boot. So I created a <code>/etc/runit/core-services/97-powertop.sh</code> script:</p><pre><code>msg &quot;Powertop autotune...&quot;
+<a href=https://twitter.com/caioalon>twitter</a>
+<article>
+<h2>Running PowerTOP on boot on Void Linux</h2><time datetime=2018-11-05>November 5, 2018</time><p><a href=https://01.org/powertop/>PowerTOP</a> doesn&rsquo;t remember settings between restarts, so it needs to be executed on every boot. Here&rsquo;s how I did it on Void Linux with runit.</p>
+<p>Runit executes every script in <code>/etc/runit/core-services</code> once on boot. So I created a <code>/etc/runit/core-services/97-powertop.sh</code> script:</p>
+<pre><code>msg &quot;Powertop autotune...&quot;
 powertop --auto-tune
-</code></pre><p>And made sure that it was executable with <code>sudo chmod +x /etc/runit/core-services/97-powertop.sh</code>.</p><p>Since PowerTOP&rsquo;s auto tune enables power management for every available device, my USB mouse kept turning off after 2 seconds of standby. In order to increase that delay to 10 minutes I changed the service file to this:</p><pre><code>msg &quot;Powertop autotune...&quot;
+</code></pre><p>And made sure that it was executable with <code>sudo chmod +x /etc/runit/core-services/97-powertop.sh</code>.</p>
+<p>Since PowerTOP&rsquo;s auto tune enables power management for every available device, my USB mouse kept turning off after 2 seconds of standby. In order to increase that delay to 10 minutes I changed the service file to this:</p>
+<pre><code>msg &quot;Powertop autotune...&quot;
 echo $((10 * 60 * 1000)) &gt; /sys/bus/usb/devices/1-1.6/power/autosuspend_delay_ms
 powertop --auto-tune
-</code></pre><p>The <code>/sys/bus/.../autosuspend_delay_ms</code> path will change depending on the device, so to discover it run <code>sudo powertop</code> and manually switch the flag in the Tunables tab.</p></article></div></body></html>
+</code></pre><p>The <code>/sys/bus/.../autosuspend_delay_ms</code> path will change depending on the device, so to discover it run <code>sudo powertop</code> and manually switch the flag in the Tunables tab.</p>
+</article>
+</div>
+</body>
+</html>

@@ -1,7 +1,30 @@
-<!doctype html><html lang=en><head><meta charset=utf-8><meta http-equiv=x-ua-compatible content="IE=edge"><meta name=viewport content="width=device-width,initial-scale=1"><title>Restarting fancontrol after resume from sleep/suspend</title><link rel=stylesheet href=/css/style.min.css><link rel=apple-touch-icon sizes=180x180 href=/apple-touch-icon.png><link rel=icon type=image/png sizes=32x32 href=/favicon-32x32.png><link rel=icon type=image/png sizes=16x16 href=/favicon-16x16.png><link rel=manifest href=/site.webmanifest><link rel=mask-icon href=/safari-pinned-tab.svg color=#5bbad5><meta name=msapplication-TileColor content="#da532c"><meta name=theme-color content="#ffffff"></head><body><div class=wrapper><h1><a href=https://caioalonso.com/>Caio Alonso</a></h1><a class=email href=mailto:caio@caioalonso.com>caio@caioalonso.com</a>
+<!doctype html><html lang=en>
+<head>
+<meta charset=utf-8>
+<meta http-equiv=x-ua-compatible content="IE=edge">
+<meta name=viewport content="width=device-width,initial-scale=1">
+<title>Restarting fancontrol after resume from sleep/suspend</title>
+<link rel=stylesheet href=/css/style.min.css>
+<link rel=apple-touch-icon sizes=180x180 href=/apple-touch-icon.png>
+<link rel=icon type=image/png sizes=32x32 href=/favicon-32x32.png>
+<link rel=icon type=image/png sizes=16x16 href=/favicon-16x16.png>
+<link rel=manifest href=/site.webmanifest>
+<link rel=mask-icon href=/safari-pinned-tab.svg color=#5bbad5>
+<meta name=msapplication-TileColor content="#da532c">
+<meta name=theme-color content="#ffffff">
+</head>
+<body>
+<div class=wrapper>
+<h1><a href=https://caioalonso.com/>Caio Alonso</a></h1>
+<a class=email href=mailto:caio@caioalonso.com>caio@caioalonso.com</a>
 <a href=https://caioalonso.com/learning/>learning</a>
+<a href=https://caioalonso.com/cv/>cv</a>
 <a href=https://github.com/caioalonso>github</a>
-<a href=https://twitter.com/caioalon>twitter</a><article><h2>Restarting fancontrol after resume from sleep/suspend</h2><time datetime=2019-01-23>January 23, 2019</time><p>Whenever I set up a new Linux system I install <a href=https://github.com/lm-sensors/lm-sensors>lm-sensors</a> and enable the fancontrol utility. Most of the time fancontrol doesn&rsquo;t get restarted when resuming from sleep/suspend. This is how I fix this with systemd:</p><p>/etc/systemd/system/fancontrol-resume.service</p><pre><code>[Unit]
+<a href=https://twitter.com/caioalon>twitter</a>
+<article>
+<h2>Restarting fancontrol after resume from sleep/suspend</h2><time datetime=2019-01-23>January 23, 2019</time><p>Whenever I set up a new Linux system I install <a href=https://github.com/lm-sensors/lm-sensors>lm-sensors</a> and enable the fancontrol utility. Most of the time fancontrol doesn&rsquo;t get restarted when resuming from sleep/suspend. This is how I fix this with systemd:</p>
+<p>/etc/systemd/system/fancontrol-resume.service</p>
+<pre><code>[Unit]
 Description=Restart fancontrol after resume from sleep/suspend
 After=suspend.target
 
@@ -11,6 +34,10 @@ ExecStart=/bin/systemctl restart fancontrol.service
 
 [Install]
 WantedBy=suspend.target
-</code></pre><p>Then:</p><pre><code>sudo systemctl daemon-reload
+</code></pre><p>Then:</p>
+<pre><code>sudo systemctl daemon-reload
 sudo systemctl enable fancontrol-resume.service
-</code></pre></article></div></body></html>
+</code></pre></article>
+</div>
+</body>
+</html>

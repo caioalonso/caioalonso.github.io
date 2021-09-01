@@ -1,28 +1,70 @@
-<!doctype html><html lang=en><head><meta charset=utf-8><meta http-equiv=x-ua-compatible content="IE=edge"><meta name=viewport content="width=device-width,initial-scale=1"><title>Personal React App Starter for Babel 7, Webpack 4</title><link rel=stylesheet href=/css/style.min.css><link rel=apple-touch-icon sizes=180x180 href=/apple-touch-icon.png><link rel=icon type=image/png sizes=32x32 href=/favicon-32x32.png><link rel=icon type=image/png sizes=16x16 href=/favicon-16x16.png><link rel=manifest href=/site.webmanifest><link rel=mask-icon href=/safari-pinned-tab.svg color=#5bbad5><meta name=msapplication-TileColor content="#da532c"><meta name=theme-color content="#ffffff"></head><body><div class=wrapper><h1><a href=https://caioalonso.com/>Caio Alonso</a></h1><a class=email href=mailto:caio@caioalonso.com>caio@caioalonso.com</a>
+<!doctype html><html lang=en>
+<head>
+<meta charset=utf-8>
+<meta http-equiv=x-ua-compatible content="IE=edge">
+<meta name=viewport content="width=device-width,initial-scale=1">
+<title>Personal React App Starter for Babel 7, Webpack 4</title>
+<link rel=stylesheet href=/css/style.min.css>
+<link rel=apple-touch-icon sizes=180x180 href=/apple-touch-icon.png>
+<link rel=icon type=image/png sizes=32x32 href=/favicon-32x32.png>
+<link rel=icon type=image/png sizes=16x16 href=/favicon-16x16.png>
+<link rel=manifest href=/site.webmanifest>
+<link rel=mask-icon href=/safari-pinned-tab.svg color=#5bbad5>
+<meta name=msapplication-TileColor content="#da532c">
+<meta name=theme-color content="#ffffff">
+</head>
+<body>
+<div class=wrapper>
+<h1><a href=https://caioalonso.com/>Caio Alonso</a></h1>
+<a class=email href=mailto:caio@caioalonso.com>caio@caioalonso.com</a>
 <a href=https://caioalonso.com/learning/>learning</a>
+<a href=https://caioalonso.com/cv/>cv</a>
 <a href=https://github.com/caioalonso>github</a>
-<a href=https://twitter.com/caioalon>twitter</a><article><h2>Personal React App Starter for Babel 7, Webpack 4</h2><time datetime=2018-11-27>November 27, 2018</time><p>Here&rsquo;s a personal record of the steps I take to start a React app from zero, understanding what every single dependency does.</p><p>If you just want a clean React starting point, clone the repository:</p><pre><code>git clone https://github.com/caioalonso/react-boilerplate
-</code></pre><p>Start here:</p><pre><code>mkdir projectname
+<a href=https://twitter.com/caioalon>twitter</a>
+<article>
+<h2>Personal React App Starter for Babel 7, Webpack 4</h2><time datetime=2018-11-27>November 27, 2018</time><p>Here&rsquo;s a personal record of the steps I take to start a React app from zero, understanding what every single dependency does.</p>
+<p>If you just want a clean React starting point, clone the repository:</p>
+<pre><code>git clone https://github.com/caioalonso/react-boilerplate
+</code></pre><p>Start here:</p>
+<pre><code>mkdir projectname
 cd projectname
 mkdir src
 touch src/index.html
 touch src/index.js
 npm init -y
-</code></pre><p>Now the dependencies:</p><pre><code>npm add --save-dev webpack webpack-cli html-webpack-plugin html-loader webpack-dev-server \
+</code></pre><p>Now the dependencies:</p>
+<pre><code>npm add --save-dev webpack webpack-cli html-webpack-plugin html-loader webpack-dev-server \
 @babel/core babel-loader @babel/preset-env @babel/preset-react \
 react react-dom \
 prettier
-</code></pre><ul><li><code>webpack</code> bundles js modules, css, compresses images, etc;</li><li><code>webpack-cli</code> cli commands for webpack;</li><li><code>html-webpack-plugin</code> generates the index.html with the correct hashes etc;</li><li><code>html-loader</code> helps the webpack plugin deal with HTML files;</li><li><code>webpack-dev-server</code> serves a local self-refreshing version of the app;</li><li><code>@babel/core</code> core of the Babel compiler, most of the official Babel stuff sits under their @ scope;</li><li><code>babel-loader</code> is a Webpack <a href=https://webpack.js.org/loaders/>loader</a> to use Babel in it;</li><li><code>@babel/preset-env</code> smart Babel preset that changes depending on which platform you&rsquo;re compiling to;</li><li><code>@babel/preset-react</code> a Babel preset for compiling React stuff (JSX etc);</li><li><code>react</code> just what is needed for defining React components;</li><li><code>react-dom</code> React renderer for the web;</li><li><code>prettier</code> help keep js and css pretty;</li></ul><p>Scripts in <code>package.json</code>:</p><pre><code>&quot;scripts&quot;: {
+</code></pre><ul>
+<li><code>webpack</code> bundles js modules, css, compresses images, etc;</li>
+<li><code>webpack-cli</code> cli commands for webpack;</li>
+<li><code>html-webpack-plugin</code> generates the index.html with the correct hashes etc;</li>
+<li><code>html-loader</code> helps the webpack plugin deal with HTML files;</li>
+<li><code>webpack-dev-server</code> serves a local self-refreshing version of the app;</li>
+<li><code>@babel/core</code> core of the Babel compiler, most of the official Babel stuff sits under their @ scope;</li>
+<li><code>babel-loader</code> is a Webpack <a href=https://webpack.js.org/loaders/>loader</a> to use Babel in it;</li>
+<li><code>@babel/preset-env</code> smart Babel preset that changes depending on which platform you&rsquo;re compiling to;</li>
+<li><code>@babel/preset-react</code> a Babel preset for compiling React stuff (JSX etc);</li>
+<li><code>react</code> just what is needed for defining React components;</li>
+<li><code>react-dom</code> React renderer for the web;</li>
+<li><code>prettier</code> help keep js and css pretty;</li>
+</ul>
+<p>Scripts in <code>package.json</code>:</p>
+<pre><code>&quot;scripts&quot;: {
 	&quot;start&quot;: &quot;webpack-dev-server --open --mode development&quot;,
     &quot;build&quot;: &quot;webpack --mode production&quot;,
 }
-</code></pre><p>Import the presets in <code>.babelrc</code>:</p><pre><code>{
+</code></pre><p>Import the presets in <code>.babelrc</code>:</p>
+<pre><code>{
   &quot;presets&quot;: [
     &quot;@babel/preset-env&quot;,
     &quot;@babel/preset-react&quot;
   ]
 }
-</code></pre><p>Import the loaders and plugins in <code>webpack.config.js</code>:</p><pre><code>const HtmlWebPackPlugin = require(&quot;html-webpack-plugin&quot;);
+</code></pre><p>Import the loaders and plugins in <code>webpack.config.js</code>:</p>
+<pre><code>const HtmlWebPackPlugin = require(&quot;html-webpack-plugin&quot;);
 
 module.exports = {
   module: {
@@ -51,4 +93,8 @@ module.exports = {
     })
   ]
 };
-</code></pre><p>Now edit <code>src/index.html</code> and <code>src/index.js</code> however you&rsquo;d like, run <code>npm start</code> to start the dev server, run <code>npm run build</code> to compile it all into <code>dist</code>.</p></article></div></body></html>
+</code></pre><p>Now edit <code>src/index.html</code> and <code>src/index.js</code> however you&rsquo;d like, run <code>npm start</code> to start the dev server, run <code>npm run build</code> to compile it all into <code>dist</code>.</p>
+</article>
+</div>
+</body>
+</html>
